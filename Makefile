@@ -71,7 +71,6 @@ bin2tap_sources = tools/zx/zxspectrum-utils/src/tap2mbd.cpp \
 	tools/zx/zxspectrum-utils/src/tzx2tap.c \
 	tools/zx/zxspectrum-utils/src/createtrd.c \
 	tools/zx/zxspectrum-utils/src/binto0.c \
-	tools/zx/zxspectrum-utils/src/bin2tap.o \
 	tools/zx/zxspectrum-utils/src/d802tap.cpp \
 	tools/zx/zxspectrum-utils/src/tap2mbhdd.cpp \
 	tools/zx/zxspectrum-utils/src/breplace.c \
