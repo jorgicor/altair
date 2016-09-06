@@ -12,7 +12,8 @@ code_bin = code.bin
 zx_code_lang_bin = release/zx/code_$(GAMELANG).bin
 zx_code_lang_tap = release/zx/code_$(GAMELANG).tap
 zx_game_lang_nc_tap = release/zx/$(game)_zx_$(GAMELANG)_nc.tap
-zx_game_lang_tap = release/zx/$(game)_zx_$(GAMELANG)_final.tap
+zx_final_tap_name = $(game)_zx_$(GAMELANG).tap
+zx_game_lang_tap = release/zx/$(zx_final_tap_name)
 zx_master_tap = data/zx/master.tap
 zx_lang_tmp = release/zx/$(GAMELANG)_tmp
 
@@ -41,7 +42,7 @@ $(zx_game_lang_tap): $(zx_cover_tap) $(zx_code_lang_bin)
 		cd $(zx_lang_tmp) && \
 		../../../$(bin2tap) code.bin && \
 		cat master.tap cover.tap code.tap > \
-			../$(game)_zx_$(GAMELANG)_final.tap && \
+			../$(zx_final_tap_name) && \
 		cd .. && rm -rf $(GAMELANG)_tmp
 
 zx_clean:

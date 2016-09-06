@@ -16,7 +16,8 @@ cpc_amscode_lang_bin = $(release_cpc)/amscode_$(GAMELANG).bin
 release_cpc_lang = $(release_cpc)/$(GAMELANG)
 release_cpc_lang_nc = $(release_cpc)/$(GAMELANG)_nc
 cpc_game_lang_nc_dsk = $(release_cpc)/$(game)_cpc_$(GAMELANG)_nc.dsk
-cpc_game_lang_dsk = $(release_cpc)/$(game)_cpc_$(GAMELANG)_final.dsk
+cpc_final_dsk_name = $(game)_cpc_$(GAMELANG).dsk
+cpc_game_lang_dsk = $(release_cpc)/$(cpc_final_dsk_name)
 cpc_master_dsk = data/cpc/master.dsk
 
 cpc_all: cpc_lang_nc
