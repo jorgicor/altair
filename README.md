@@ -32,16 +32,13 @@ Assembler). You can use `uz80as` which is free software and available here:
 http://jorgicor.sdfeu.org/uz80as .
 
 Then, you must build some required tools that are included in this package.
-Enter the `tools/`folder and run `make`:
+Type:
 
 ~~~
-$ cd tools
-$ make
-$ cd ..
+$ make thetools
 ~~~
 
-Now you are ready to build the game. Run `make` on the top directory of this
-package:
+Now you are ready to build the game. Type:
 
 ~~~
 $ make
@@ -56,6 +53,7 @@ As an alternative, you can use:
 - `make clean` to clean some generated files.
 - `make distclean` to clean all generated files that are not distributed.
 - `make dist` to make a distribution source package.
+- `make clean_thetools` to clean build objest in the tools folder.
 
 Licenses
 ========

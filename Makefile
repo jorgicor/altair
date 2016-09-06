@@ -1,5 +1,11 @@
 all: zx cpc
 
+thetools:
+	cd tools ; $(MAKE)
+
+clean_thetools:
+	cd tools ; $(MAKE) clean
+
 dist_tar = altair_src.tar
 
 mk_sources = Makefile zx.mk cpc.mk zxdef.mk cpcdef.mk forlangs.sh sources.mk \
@@ -149,7 +155,7 @@ clean:
 	$(MAKE) -f zxdef.mk zxdef_clean
 	$(MAKE) -f cpcdef.mk cpcdef_clean
 
-distclean: clean
+distclean: clean_thetools clean
 	$(MAKE) -f zxdef.mk zxdef_distclean
 	$(MAKE) -f cpcdef.mk cpcdef_distclean
 
