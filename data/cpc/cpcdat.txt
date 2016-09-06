@@ -1,0 +1,110 @@
+2 palette
+1 font_SPC 40 64 9
+1 font_33 40 64 9
+1 font_34 40 64 9
+1 font_35 40 64 9
+1 font_36 40 64 9
+1 font_37 40 64 9
+1 font_38 40 64 9
+1 font_39 168 72 9
+1 font_40 40 64 9
+1 font_41 40 64 9
+1 font_42 40 64 9
+1 font_43 40 64 9
+1 font_44 48 72 9
+1 font_45 56 72 9
+1 font_46 64 72 9
+1 font_47 72 72 9
+1 font_0 80 80 9
+1 font_1 88 80 9
+1 font_2 96 80 9
+1 font_3 104 80 9
+1 font_4 112 80 9
+1 font_5 120 80 9
+1 font_6 128 80 9
+1 font_7 136 80 9
+1 font_8 144 80 9
+1 font_9 152 80 9
+1 font_COLON 160 72 9
+1 font_59 40 64 9
+1 font_60 40 64 9
+1 font_61 40 64 9
+1 font_62 40 64 9
+1 font_63 40 64 9
+1 font_64 40 64 9
+1 font_A 48 64 9
+1 font_B 56 64 9
+1 font_C 64 64 9
+1 font_D 72 64 9
+1 font_E 80 64 9
+1 font_F 88 64 9
+1 font_G 96 64 9
+1 font_H 104 64 9
+1 font_I 112 64 9
+1 font_J 120 64 9
+1 font_K 128 64 9
+1 font_L 136 64 9
+1 font_M 144 64 9
+1 font_N 152 64 9
+1 font_O 160 64 9
+1 font_P 168 64 9
+1 font_Q 176 64 9
+1 font_R 184 64 9
+1 font_S 192 64 9
+1 font_T 200 64 9
+1 font_U 208 64 9
+1 font_V 216 64 9
+1 font_W 224 64 9
+1 font_X 232 64 9
+1 font_Y 240 64 9
+1 font_Z 248 64 9
+1 font_91 40 64 9
+1 font_92 40 64 9
+1 font_93 40 64 9
+1 font_94 40 64 9
+1 font_95 48 80 9
+1 hudlife 0 80 8
+0 alim00 0 0 16 6
+0 alim01 0 8 16 6
+0 alim10 0 16 16 6
+0 alim11 0 24 16 6
+0 alim20 0 32 16 6
+0 alim21 0 40 16 6
+0 alim30 24 0 16 6
+0 alim31 24 8 16 6
+0 alim40 24 16 16 6
+0 alim41 24 24 16 6
+0 alim50 24 32 16 6
+0 alim51 24 40 16 6
+0 alim60 48 0 16 6
+0 shot10 8 80 4 4
+0 shot11 16 80 4 4
+0 shot00 24 80 4 4
+0 shot01 32 80 4 4
+0 sshot00 24 72 4 4
+0 sshot01 32 72 4 4
+0 cross_shot_im 16 64 8 8
+0 fire_im0 56 24 8 8
+0 fire_im1 64 32 8 8
+0 ship_im 56 16 8 8
+0 lwng_im 48 16 8 8
+0 rwng_im 64 16 8 8
+0 cnon_im 56 8 8 8
+0 house_im_0 0 88 24 8
+0 house_im_1 0 96 24 8
+0 explosion_im0 0 48 16 11
+0 explosion_im1 0 64 16 10
+0 explosion_im2 16 48 16 12
+0 mine_im 48 40 8 7
+0 bird_up 80 0 48 8
+0 bird_grid0 88 8 8 8
+0 bird_grid1 144 8 8 8
+0 bird_center 96 16 16 24
+0 bird_left 80 8 8 40
+0 bird_right 120 8 8 40
+0 bird_bleft 88 40 8 12
+0 bird_bright 112 40 8 12
+0 bird_lwing0 88 16 8 24
+0 bird_lwing1 144 16 8 24
+0 bird_rwing0 112 16 8 24
+0 bird_rwing1 168 16 8 24

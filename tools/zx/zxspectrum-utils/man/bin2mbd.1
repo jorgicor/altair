@@ -1,0 +1,27 @@
+.TH BIN2MBD 1 "Date: 2013/13/07 01:00:00" "ZX Spectrum utils"
+.SH NAME
+bin2mbd \- convert binary file into .mbd file
+.SH SYNOPSIS
+.TP
+\fBbin2mbd\fP [\fIoptions\fP] \fI[input_file]\fP
+.SH OVERVIEW
+The \fBbin2mbd\fP program is a member of zxspectrum-utils(1) suite of tools. Use it to convert raw file into CODE block in a .mbd file.
+.SH DESCRIPTION
+You can specify new target file or use existing one (it can add to existing images aswell) or target file can be created from input file name if you don't specify it. Program can be used for creating empty disc images when you specify just output file name.
+
+All options are optional. If some option is requied and not set, it's used default value. You must set input file name, output file name or both of them.
+
+Options are:
+  \-nt <arg>     no. of tracks of new disc image, default 82
+  \-ns <arg>     no. of sectors of new disc image, default 11
+  \-nsur <arg>   no. of surfaces of new disc, default 2
+  \-d <arg>      no. of directory where the program put the file,
+                default 0
+  \--dir <arg>   same as -d
+  \-a <arg>      starting address of binary file
+  \-o <file>     set output file
+  \-h            show help text
+  \--help        same as -h
+  \-v            show version of program
+  \--version     same as -v
+

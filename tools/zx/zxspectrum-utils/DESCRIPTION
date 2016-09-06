@@ -1,0 +1,538 @@
+
+
+ ╔════════════════════════════════════════════════════════════════════╗
+ ║                ZX-Spectrum emulators format utilities              ║
+ ╚════════════════════════════════════════════════════════════════════╝
+
+ Preview
+ =======
+
+   Analysers
+   ---------
+     lstbas ..... ZX Basic LIST command
+     dir0 ................ 000 analyser
+     dirtap .............. TAP analyser
+     dirhob ........... Hobeta analyser
+     tsttap ......... TAP parity tester
+     mbdir ......... MBD image analyser 
+
+  Convertors
+  ----------
+     0totap ....... convertor 000=>TAP
+     tapto0 ....... convertor TAP=>000
+     0tobin ....... convertor 000=>BIN
+     binto0 ....... convertor BIN=>000
+     0tohob .... convertor 000=>HOBETA
+     hobto0 .... convertor HOBETA=>000
+     bin2mbd ...... convertor BIN=>MBD
+     bin2tap ...... convertor BIN=>TAP
+     d802tap ...... convertor D80=>TAP
+     makesna . convert binaries to SNA
+     mbload .... extract file from MBD
+     mb2tap ....... convertor MBD=>TAP
+     tap2d80 ...... convertor TAP=>D80
+     tap2mbd ...... convertor TAP=>MBD
+     tap2mbhdd .. convertor TAP=>MBHDD
+     tap2tzx ...... convertor TAP=>TZX
+     tzx2tap ...... convertor TZX=>TAP
+
+  Utils
+  -----
+     breplace ........ binary replace
+
+   All utilities are self-explanatory, it means if you run a program
+   without any parameter then short help page will be displayed.
+   You can use wildcards '*' and '?' in filename parameters in all
+   programs besides LIST and BINto0.
+
+   All displayed information are printed out via standart output (stdout),
+   it means you can easy redirect all outputs to file ( >file or >>file )
+   or you can make a pipe ( for example: dirtap *.tap | more ).
+
+
+ Utilities in this package - file analysers
+ ==========================================
+
+ Dir0
+ ----
+  Usage: Dir0 [-p] file1 [file2 ...] [> outfile.lst]
+    Prints header information of input files in 000 format.
+    Option: -p ... additional parity tester [not correcter]
+    You can use wildcards '*' and '?' in filename parameters.
+  If you use parameter ">outfile.lst" for redirect standart output,
+  all information will be printed to file OUTFILE.LST as plain text.
+  This information is displayed about each file:
+    MS-DOS file ... what file is it in ms-dos
+    Type .......... |
+    Name .......... |
+    Length ........ | 17-byte tape header of file
+    Start ......... |     (if file is with header)
+    Basic ......... |
+    Sum ........... parity for header (only if "-p" is specified)
+    Length ........ length of body
+    Flg ........... flagbyte of body
+    Sum ........... parity for body (only if "-p" is specified)
+  If type of file is numb/char array, then item 'Start' is variable name.
+
+
+ DirHOB
+ ------
+  Usage: DirHOB file1 [file2 ...] [> outfile.lst]
+    Prints header information of input files in Hobeta format.
+    You can use wildcards '*' and '?' in filename parameters.
+  If you use parameter ">outfile.lst" for redirect standart output,
+  all information will be printed to file OUTFILE.LST as plain text.
+  This information is displayed about each file:
+    MS-DOS file ... what file is it in ms-dos
+    Filename ...... 8-character TR-DOS filename
+    Ext ........... type of file (extension)
+    Start ......... parameter 1 (see Hobeta file format)
+    Length ........ parameter 2 (see Hobeta file format)
+    SecLen ........ how many bytes is allocated by file on TR-DOS disk
+    Run/Var ....... additional four bytes - autostart or variable name
+
+
+ DirTAP
+ ------
+  Usage: DirTAP [options] file1.tap [file2.tap ...] [> outfile.lst]
+    Prints contens of TAP input files.
+    Options: -h ... only headers will be displayed
+             -p ... additional parity tester [not correcter]
+    You can use wildcards '*' and '?' in filename parameters.
+  If you use parameter ">outfile.lst" for redirect standart output,
+  all information will be printed to file OUTFILE.LST as plain text.
+  This information is displayed about each block in tape file:
+    Offset ... position of block in tape file (offset from begin)
+    Len ...... length of block (without flagbyte and parity)
+    Flg ...... flagbyte of block
+    Type ..... |
+    Name ..... |
+    Len ...... | 17-byte tape header
+    Add ...... | (if block has len=17,flg=0)
+    Bas ...... |
+  If type of file is numb/char array, then item 'Add' is variable name.
+
+
+ LIST
+ ----
+  Usage: LIST [options] filename.bas [>outfile.lst]
+    List of basic program and variables in filename.bas
+    Options: -c ... display control codes (characters 0-31)
+             -n ... display value of each number (after code 14)
+             -s ... display contens of simple strings (in variables)
+    If you use parameter ">outfile.lst" for redirect standart output,
+    all information will be printed to file OUTFILE.LST as plain text.
+    Filename.bas must be plain binary file without any format headers.
+    You can use 0toBIN to make this filename.bas (for example).
+    Note: You can NOT use wildcards '*' and '?' in filename.bas!
+  This utility is useful for hacking basic programs what contains
+  faked number (value after code 14 is another than you see in listing)
+  or incorrect control codes (for paper,ink...)
+  and you can see what variables are defined in this program.
+
+
+ TstTAP
+ ------
+  Usage: TstTAP [-a|-s] file1 [file2 ...]
+    Test and repair parity check sum in TAP files.
+    You can use wildcards '*' and '?' in filename parameters.
+    If bad parity found, then program asks you what action is needed.
+    You can as answer press:
+      Y = Yes .... repair the bad parity
+      N = No ..... don't repair
+      A = All .... don't ask and repair all parities
+      S = Skip ... don't ask and don't repair
+      E = Exit ... exit to ms-dos
+    You can as answers specify this options (non interactive mode):
+      -a ... repairs all bad parity without questions (the same as A key)
+      -s ... do not repairs all bad parity, test only (the same as S key)
+  TstTAP needs write access into file for repair bad parity.
+  Note: When you use TstTAP with redirected standart output,
+  it's recomended to use it with option for non-interactive mode.
+
+
+ Utilities in this package - file format convertors
+ ==================================================
+
+ Generally: XXXtoYYY converts XXX format into YYY format.
+ If target YYY format is not 000 and output file is already
+ exists, then it will be rewritten without confirm. (Remember it!)
+ If targed format is 000 then output file will be NEVER rewritten
+ and its extension will be the most small three digit number.
+ It means: If files .000 .001 .002 already exist, output file
+ will be .003. See details of file formats in next chapter.
+
+
+ 0toBIN
+ ------
+  Usage: 0toBIN file1 [file2...]
+    Converts input files in 000 format into plain
+    binary files without any additional format headers.
+    You can use wildcards '*' and '?' in filename parameters.
+    Extension of output binary files will be:
+      BAS for basic program   DAT for number or character array
+      COD for code or bytes   BIN for headerless or unknown type
+
+
+ 0toHOB
+ ------ 
+  Usage: 0toHOB file1 [file2...]
+    Converts input files in 000 format into Hobeta file format.
+    You can use wildcards '*' and '?' in filename parameters.
+    Extension of output files will be .$T where T is file type.
+  If 000 file was created by HOBto0 then extension and file type
+  of output hobeta file will be the same as original hobeta file.
+  If original hobeta file contained overlays then this overlays
+  will be saved into file with extension $O.
+
+
+ 0toTAP
+ ------
+  Usage: 0toTAP file1 [file2 ...]
+         0toTAP [-o outfile.[tap]] file1 [file2 ...]
+         0toTAP [-a outfile.[tap]] file1 [file2 ...]
+    Converts one or more input files into one file OUTFILE.TAP
+    Input files must be in 000 format and OUTFILE will be in TAP format.
+    You can use wildcards '*' and '?' in parameters for input files.
+    But wildcards in output file "outfile[.tap]" is NOT allowed.
+    Options: -o ... overwrites old OUTFILE.TAP (if exists)
+             -a ... appends new information at end of OUTFILE.TAP
+    If -o or -a is not specified then name of output file will be
+    the same as first converted input file and extension will be "TAP"
+    and if this file already exist, it will be overwrite (-o is default).
+  There parity of files is testing during conversion. If it is bad,
+  then warning is displayed.
+
+
+ BINto0
+ ------
+  Usage: BINto0 input_file TYP [ADD [BAS]]
+    Converts binary input file into 000 file format
+    (makes 000 format header for plain binary input file).
+    Extension of output file will be three-digit number.
+    Note: You can NOT use wildcards '*' and '?' in input_file!
+    Meaning of numbers TYP,ADD,BAS for making header:
+      TYP = 0 ... Program (basic)
+            1 ... Number array (data)
+            2 ... Character array (data)
+            3 ... Bytes (code)
+            4 ... file without header (headerless)
+      ADD = basic ........ start line (default: without autostart)
+            data ......... variable name (encoded in nuber)
+            code ......... first address (default: 32768)
+            headerless ... flag byte (default: 255)
+      BAS = length of basic without variables (other types not need)
+            default: the same as length (basic) and 32768 (others)
+  Parameters ADD and BAS are optional - you may not specify it.
+
+
+ HOBto0
+ ------
+  Usage: HOBto0 file1 [file2 ...]
+    Converts input files in Hobeta format into 000 file format.
+    You can use wildcards '*' and '?' in filename parameters.
+    Extension of output files will be three-digit number.
+  If input filename contains additional sectors (called overlays)
+  then it will be saved into two 000 files. Second 000 file will
+  contain this ovetlays and type of this file will be always Bytes.
+  After backward conversion this 000 file into Hobeta will be type
+  of output file "O" and extension $O.
+  For example monoloader programs have overlays.
+
+
+ TAPto0
+ ------
+  Usage: TAPto0 file1 [file2 ...]
+    Converts input files in TAP format into 000 file format.
+    You can use wildcards '*' and '?' in filename parameters.
+  Names of the output files are by the ZX Spectrum name.
+  Illegal characters for ms-dos are replaced by '~'.
+  Note: There is no way how to detect if source is TAP format. This
+  convertor uses little heuristic detection and it can fail sometimes.
+
+ MAKESNA
+ -------
+  Usage: makesna output.sna {PC} input1 {dest_adr} [input {dest_adr}]*
+    Converts binary files into SNA file. Start address of the SNA file will
+    be {PC} address and each input file will be stored at {dest_adr}. You can
+    use addresses up to 128kB, so you can easy create snapshot for 128k
+    Spectrum.
+  Example:
+    makesna 128game.sna 24200 program.bin 24200 page17.b 65536 page19.b 81920
+
+ TAP2TZX
+ -------
+  Usage: tap2tzx input.tap [output.tzx]
+   This utility will let you convert standard .TAP files to .TZX format. This
+   could be usefull if you want to replay .TAP files using the PLAYTZX utility
+   or convert them to .VOC format. A standard pause of 1 second will be put
+   after every converted block.
+   If output.tzx is not given then the INPUT filename will be used, but its
+   extension will be changed to .tzx.
+
+ TZX2TAP
+ -------
+  Usage: tzx2tap input.tzx [output.tap]
+   This utility will let you convert the new format .TZX files to standard
+   .TAP files, which are used by most emulators today. Since .TZX files have
+   more information about speed and other important features these features will
+   be lost during conversion. If the .TZX file only had normal loading blocks
+   then this ofcourse will not matter. All Normal Loading, Custom Loading and
+   Pure Data blocks will be converted into .TAP file... however the blocks which
+   are over 64k long will be skipped. Ofcourse all other information and control
+   blocks will be skipped too.
+   This might be usefull for those emulators that can use only .TAP files and
+   can figure out the speed themselves from the actual code (like Warajevo,
+   Radovan Garabik's emulator,...).
+
+   If OUTPUT.TAP is not given then the INPUT filename will be used, but its
+   extension will be changed to .TAP.
+   If any of the non-standard blocks are encountered then the --Warning will
+   be displayed, so you know what has been converted and what has been skipped.
+
+
+ Graphic preview
+ ===============
+
+  Here is a small picture how the convertors and analysers works. Legend:
+     ╔═════════════╗  ────────────────────────  ─────────────────────
+     ║ file format ║  ==> format convertor ==>  => format analyser =>
+     ╚═════════════╝
+
+                                          => TstTAP =>
+                                         ┌────────────┐
+                       ==> 0toTAP ==>   ╔╧═══════╗    │
+                 ┌──────────────────────╢  TAP   ║<───┘
+                 │     <== TAPto0 <==   ╚═══════╤╝
+                 │                              └───────────> You
+                 │                               => DirTAP =>
+             ╔═══╧═╗   ==> 0toHOB ==>   ╔════════╗
+             ║ 000 ╟────────────────────╢ HOBETA ║
+    You      ╚╤══╤═╝   <== HOBto0 <==   ╚═══════╤╝
+    <─────────┘  │                              └───────────> You
+    <= Dir0 <=   │                               => DirHOB =>
+                 │     ==> 0toBIN ==>   ╔════════╗
+                 └──────────────────────╢ BINARY ║
+                       <== BINto0 <==   ╚╤══════╤╝
+                                         │      └───────────> You
+                                MS-DOS───┘         => LIST =>
+
+
+  For example you have some programs in Hobeta format and you need them
+  in TAP format. You see that you need HOBto0 and 0toTAP convertors.
+  Aply first HOBto0 convetor to make 000 files, then aply 0toTAP convetor
+  to make TAP file(s). You can run parity test for new TAP file by TstTAP.
+  Now you can see contens of new TAP file by using DirTAP analyser.
+  If you want see listing of basic in your program and this program is
+  in 000 format, then take 000 file with this basic, convert it to binary
+  format by using 0toBIN and make listing from this file by using LIST util.
+
+
+ Supported file formats
+ ======================
+
+  TAP - format of Speccy files used by
+        (the best!) ZX Emulator Z80 2.01 [(C) 1993 G.A.Lunter]
+        This is the most popular format for storing Speccy
+        demos/utils/games on anonymous ftp servers.
+
+  000 - format of Speccy files used by
+        ZX Spectrum emulator [(c) 1991 E.Rindt & L.Brukner]
+        This format is convertable from/into MDOS disk (D40/D80) by
+        program EI-Manager ( Import / Zxsm->didaktik ) directly.
+
+  HOB - (Hobeta) - format for storing TR-DOS files used by HoBeta
+        program [HoBeta V2.15, Copyright (C) 1990,92 SP-Cube Co.]
+        This format is convertable from/into TR-DOS disk (Betadisk)
+        by program HoBeta directly.
+
+  BIN - plain raw binary file without any headers or format informations
+
+ Description of each format follows.
+
+
+ TAP file format
+ ===============
+
+ This chapter is part of documentation to Sinclair ZX Spectrum 48/128/SamRam/
+  /Interface1/RS232/AY-3-8912 Emulator 'Z80' v2.01 - 3/5/93 - by G.A. Lunter:
+
+    The .TAP files contain blocks of tape-saved data. All blocks start with
+    two bytes specifying how many bytes will follow (not counting the two
+    length bytes). Then raw tape data follows, including the flag and
+    checksum bytes. The checksum is the bitwise XOR of all bytes including
+    the flag byte. For example, when you execute the line SAVE "ROM" CODE
+    0,2 this will result:
+
+
+             |------ Spectrum-generated data -------|       |---------|
+       13 00 00 03 52 4f 4d 7x20 02 00 00 00 00 80 f1 04 00 ff f3 af a3
+
+       ^^^^^       first block is 19 bytes (17 bytes+flag+checksum)
+             ^^    flag byte (A reg, 00 for headers, ff for datablocks)
+                ^^ first byte of header, indicating a code block
+
+       filename    ^^^^^^^^^^^^^
+       header info               ^^^^^^^^^^^^^^^^^
+       checksum of header                          ^^
+       length of second block                         ^^^^^
+       flag byte                                             ^^
+       first two bytes of rom                                  ^^^^^
+       checksum (checkbittoggle would be better)                     ^^
+
+
+    Note that it is possible to join .TAP files by simply stringing them
+    together, for example COPY /B FILE1.TAP + FILE2.TAP ALL.TAP
+
+    For completeness, I'll include the structure of a tape header.
+    A header always consists of 17 bytes:
+
+        Byte    Length  Description
+        0       1       Type (0,1,2 or 3)
+        1       10      Filename (padded with blanks)
+        11      2       Length of data block
+        13      2       Parameter 1
+        15      2       Parameter 2
+
+    The type is 0,1,2 or 3 for a Program, Number array, Character array or
+    Code file. A screen$ file is regarded as a Code file with start address
+    16384 and length 6912 decimal. If the file is a Program file, parameter
+    1 holds the autostart line number (or a number >=32768 if no LINE
+    parameter was given) and parameter 2 holds the start of the variable
+    area relative to the start of the program. If it's a Code file,
+    parameter 1 holds the start of the code block when saved, and parameter
+    2 holds 32768. For data files finally, the byte at position 14 decimal
+    holds the variable name.
+
+
+ 000 file format
+ ===============
+
+ This format is like TAP, but main difference is each block (with or
+ without 17-byte header) is stored in his own file. First byte of file
+ is #00 for block with header and #FF for block without header.
+ Extensions of file with this format may be 000,001,002...999.
+
+ Blocks without header:
+ For example if you run this routine:
+
+    ... ld ix,0  ;  ld de,2  ;  ld a,#FF  ;  call #04C2 ...
+
+ then you will make this file (length 5 bytes):
+
+
+                                        |---------| Spectrum generated
+                                     FF FF F3 AF A3               data
+ Mark byte (file is without header)  ^^          ^^ parity
+                       flagbyte of body ^^
+                    first two bytes of rom ^^^^^
+
+
+ Blocks with header:
+ For example the same example as in TAP-section: SAVE "ROM" CODE 0,2
+
+
+              |------ Spectrum-generated data -------| |---------|
+           00 00 03 52 4f 4d 7x20 02 00 00 00 00 80 f1 ff f3 af a3
+ Mark byte ^^                                                   ^^ parity
+              ^^ <- flagbyte of header (always 0)      ^^ flagbajt of body
+ 17-byte header  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^      
+ (the same as in TAP)              parity of header ^^    ^^^^^ first two
+                                                                bytes of rom
+
+ The parity (or checksum, checkbittoggle) is the bitwise XOR
+ of all bytes including the flag byte - the same as in TAP files.
+
+
+ Binary or raw data format
+ =========================
+
+  It's plain binary file without any headers or format informations
+  and can have extensions bin,bas,dat,cod (usually).
+  File contains only user's data and nothing more. It looks very easy:
+  [our example SAVE "ROM" CODE 0,2 => output filename is 2 bytes length]
+
+                                  F3 AF
+
+
+ Hobeta file format
+ ==================
+
+ Hobeta format is like 000 - each block is stored in his own file.
+ First 13 bytes are copied from TR-DOS directory entry, next two bytes
+ mean how many bytes are alocated by file on TR-DOS disk (brutto length)
+ and next two bytes are header checksum. Then bytes of body follows.
+ Extension of hobeta files is $T, where T is type of file (see below).
+
+ Note: [1] low byte of brutto length is always 0 because TR-DOS uses
+           256 byte length sectors for storing files on disk.
+           Netto length means real length of user's saved data.
+       [2] TR-DOS uses only 8 characters length file names in dir entry.
+           If file name is shorter, then it's space-blanked.
+
+ Our well known example: SAVE "ROM" CODE 0,2
+ Netto length is 2 bytes in this case.
+
+                                                          256 bytes of
+   |--- directory entry from TR-DOS ----|             |-- brutto length --|
+   72 6F 6D 20 20 20 20 20 43 00 00 02 00 00 01 9D 36 F3 AF ?? ?? ?? ... ??
+   ^^name of file^^^^^^^^^                            ^^^^^ two bytes of rom
+              Type of file ^^                   ^^^^^ check sum
+                  Parameter 1 ^^^^^       ^^^^^ brutto length
+                        Parameter 2 ^^^^^
+   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ 17-byte hobeta header
+
+
+ Taputils support these types of file:
+
+   B - basic file (Program)
+   D - variable data (Number array, Character array)
+   C - code block (Bytes (or Code))
+   Z - source text from MRS 09
+   # - sequence (file with sequential access)
+
+ However, taputils are able to convert any other file type - in this case all
+ information in dir entry will be interpreted the same as file type C (bytes).
+
+ Meaning of parameters 1 and 2 depend type of file:
+
+   Parameter 1 - B: total length of basic and variables (netto length)
+                 C: start address
+                 any other: not important (mostly start address)
+   Parameter 2 - B: length of basic without variables
+                 #: position of file pointer (offset)
+                 D,C,Z: netto length of saved data
+                 any other: netto length (mostly)
+
+ Files with type B and D need additional information about start line
+ or variable name. This information is stored in four special bytes at
+ the end of file, because there is no related information in hobeta header.
+
+ Example: Let basic is 10 bytes length. Save it: SAVE "basic" LINE 1
+ Hobeta file will be:
+
+                               |----------------brutto length--------------|
+  XX XX XX ............. XX XX XX XX XX ........ XX XX 80 AA 00 01 ?? ... ??
+  |-- 17-byte hobeta header--| |--10 bytes of basic--| ^^^^^^^^^^^additional
+                                    (netto length)                     bytes
+
+
+ Four additional bytes is always 80 AA MM NN
+ If file type is B (basic) then MM+256*NN means autostart line,
+ if file type is D (array) then NN keeps name of the variable.
+ [Meaning of MM NN is the same as param.1 of tape header (see TAP section)]
+
+
+ Two last bytes of hobeta header keep checksum of this hobeta header.
+ How to compute the checksum:
+
+ Basic: LET a$="first 15 bytes of hobeta header"
+        LET a=0: FOR b=1 TO 15: LET a=a+CODE a$(b): NEXT a
+        LET checksum=257*a+105
+
+ C-src: unsigned int a,b,checksum;
+        unsigned char *bufptr = address_of_hobeta_header;
+        for (a=0,b=0; b<=14; a+=*(bufptr+b),b++);
+        checksum=257*a+105;
+
+ ==============================================================================

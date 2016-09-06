@@ -1,0 +1,3 @@
+	.db DS10, AS6, DS3, DS3, F9, F9, F4, F4, FS5, G6, FS6, GS7, G7, AS8
+	.db G8, B9, GS9, G9, A2, DS4, A3, F5, B4, G6, B5, B5, AS7, C7, CS9
+	.db C8, F10, CS9, E9, D10, B9

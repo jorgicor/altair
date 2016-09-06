@@ -1,0 +1,11 @@
+mmelody mode asmfile
+
+	'mode' is 'zx' or 'cpc'.
+
+	Takes 'asmfile' and takes all the notes it can find. Notes any text
+that starts with a note name (ABCDEFG), an optional 'S' character for
+one semitone up, and a octave number. Then the program finds the highest
+and lowest pitch. Then, outputs to console the same asmfile, but all the
+notes are changed to a lower pitch or higher pitch if the highest pitch
+is too high or the lowest pitch is too low for the architecture. That is
+all the song pitch is raised or lowered.

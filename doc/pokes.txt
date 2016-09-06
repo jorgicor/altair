@@ -1,0 +1,19 @@
+POKES
+=====
+
+When you assemble the game, the assembler will print this two lines:
+
+~~~
+Invincible: 32985
+Pass level: 32986
+~~~
+
+The numbers are an example and can vary.
+
+Setting the `Invincible` address to `1` will make you immune to shots.
+Setting address `Pass level` to `1` will allow you to use the key `D` to pass
+the current level.
+
+Enjoy
+
+*Jorge Giner*

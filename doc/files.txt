@@ -1,0 +1,76 @@
+(ZX) or (CPC) means that the file is only included for that architecture.
+
+altair.asm	Main entry point, state driver, cheats.
+interr.asm	Interrupt driver (sound, input).
+altair_cpc.asm	(CPC) Star drawing and other functions.
+altair_zx.asm	(ZX) Star drawing and other functions.
+c_config.asm	Configuration: MASTER_VERSION, BRIGHT_MODE, CHEATS, etc.
+const.asm	Game constants.
+anim.asm	Animations driver.
+images.asm	Images, animations, etc..
+	zxims.asm		(ZX) Images.
+	imtables_zx.asm		(ZX) Image tables.
+	anims_zx.asm		(ZX) Animation tables.
+	masters_zx.asm		(ZX) Sprite masters.
+	cpcims.asm		(CPC) Images.
+	imtables_cpc.asm	(CPC) Image tables.
+	anims_cpc.asm		(CPC) Animation tables.
+	masters_cpc.asm		(CPC) Sprite masters.
+bbuf.asm	Screen drawing (back buffer or not) drawing.
+	bbuf_zx.asm	(ZX) Drawing special routines.
+	bbuf_cpc.asm	(CPC) Drawing special routines.
+obfun.asm	Object behaviors.
+drmach.asm	Virtual machine for drawing menus, etc
+hud.asm		HUD display (score, etc).
+timer.asm	Some gameplay timers.
+font_zx.asm	(ZX) Font images for the spectrum.
+
+Library
+-------
+
+lib.asm		Generic routines.
+	lib_zx.asm	(ZX) Generic routines.
+	lib_cpc.asm	(CPC) Generic routines.
+		rndnums.ams	256 random numbers.
+c_lib_zx.asm	(ZX)	Library constants.
+c_lib_cpc.asm	(CPC)	Library constants.
+
+RAM
+---
+
+ram.asm		Buffers and tables needed at runtime but not in the game file.
+	r_lib_zx.asm	(ZX) RAM needed for the architecture library.
+	r_lib_cpc.asm	(CPC) RAM needed for the architecture library.
+
+STATES
+------
+
+states.asm		Game state driver.
+disclaimer_st.asm	Disclaimer.
+dedicate_st.asm		Dedication.
+menu_st.asm		Main screen (display points per alien killed, etc).
+options_st.asm		Menu for options.
+attract_st.asm		Attract mode state.
+round_st.asm		Player 1 or 2 blue screen.
+gameplay_st.asm		Gameplay.
+killed_st.asm		Player killed.
+gameover_st.asm		Final game over screen.
+name_st.asm		Player writes his name for highscore.
+
+SOUND
+-----
+
+ay.asm		Defines AY registers and the AY buffer.
+	ay_zx.asm	(ZX) detect_ay and ay_refresh.
+	ay_cpc.asm	(CPC) detect_ay and ay_refresh.
+sound.asm	Channel based sound driver.
+	notes.asm	Note indexes for frequency tables.
+	tone_ay.asm	AY tones table.
+	tone_beep.asm	(ZX) Beeper tones table.
+	sound_zx.asm	(ZX) Update beeper sound.	
+	sound_cpc.asm	(CPC) Empty update_beep.
+altair_snd.asm		AY game sfx and tunes.
+	altair_snd_zx.asm	(ZX) Beeper game sfx and tunes.
+song_xx_zx.asm		(ZX) Songs for each level.
+song_xx_cpc.asm		(CPC) Songs for each level.
+

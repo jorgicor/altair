@@ -1,0 +1,8 @@
+Calculates the periods for the ZX Spectrum beeper routine.
+The formula is 437500 / note_freq - 29.5 (the ROM BEEP routine uses
+437500 / note_freq - 30.125).
+
+Each note in the western 12 equal temperament is at a factor of 2^(1/12)
+from the previous. A4 is 440Hz. The frequency one octave note is exactly
+the double of the previous octave note frequency.
+

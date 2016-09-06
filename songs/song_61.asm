@@ -1,0 +1,5 @@
+	.db F3, FS4, F3, G4, G4, A5, F4, AS5, G5, B6, GS5, CS7, A6, DS8, A6
+	.db F8, AS7, G9, B7, AS9, C9, G9, C9, B7, CS10, E10, D10, B9, D3
+	.db F7, DS3, E2, F4, F3, G4, G3, GS5, G4, A5, G4, AS6, GS5, C7, A5, D8
+	.db A6, E8, AS6, FS9, AS7, GS9, B7, B9, C9, C9, CS9, CS9, CS8, D10
+	.db GS7, DS10, AS6

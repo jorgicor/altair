@@ -1,0 +1,41 @@
+bmp2asm mode assembler spec bitmap [output_file_name]
+
+	This programs is used to extract pixel data from a .bmp file 'bitmap'
+in assemler format. It uses a text based 'spec' file that specifies how to
+extract the data. The bitmap must have palette. 'assembler' specifies for
+which assembler are we generating the data. If 'ouput_file_name' is not
+specified, data is generated on the standard output (console).
+
+'mode' can be:
+
+	cpc16x2		Amstrad CPC 16 colors doubled
+
+		This mode means that the in the original bitmap each 2 pixels
+	forms a pixel on the amstrad, thus we only take the even horizontal
+	pixels from the bitmap (odd horizontal pixels are ignored). Then the
+	pixels are extracted to form pixel data for an Amstrad CPC in mode 0
+	(16 colors per pixel).
+
+'assembler' can be:
+
+	tasm		Telemark Cross Assembler
+
+The 'spec' file is a text file and each line is a command that instructs what
+to extract. These are the commands allowed:
+
+	0 name x y w h
+		Extracts an sprite with label 'name'. We will extract the
+		pixels from the bitmap starting at x,y coordinates and with
+		dimensions w,h (width, height). The output format depends on
+		'mode'.
+	1 name x y color
+		Extracts a font character with a label 'name' from the pixel
+		coordinates x,y. A font character is 8x8 pixels. Color is a
+		palette index in the original bitmap. We only extract pixels
+		with that color, the rest are considered transparent. The
+		output format depends on 'mode'.
+	2 name
+		The palette is extracted with label 'name'. How many colors are
+		extracted depends on 'mode'. The colors are in hardware units
+		and with 64 added. For example, 20 is black in hardware units
+		(in firmware units it is 0), so we extract 84 for that color.

@@ -1,0 +1,32 @@
+
+ ╔════════════════════════════════════════════════════════════════════╗
+ ║                ZX-Spectrum emulators format utilities              ║
+ ╚════════════════════════════════════════════════════════════════════╝
+
+    Do you have ZX Spectrum programs in some format and ZX Spectrum
+    emulator (or any convertor program) working with another format ?
+    Do you want import any binary file into ZX Spectrum emulator ?
+    Do you want export any file from ZX Spectrum emulator into binary ?
+    Do you have files with parity error and do you want repait them ?
+    Do you have some files and do you want display contens of them ?
+    Do you have basic program and do you see listing of this program ?
+
+  If you have answered "YES" at least one question, then you need
+  this utilities !
+
+  This package contains these files:
+
+    README ........ You are reading it now
+    DESCRIPTION ... documentation, file formats
+
+  To contact the authors of taputils, use following methods:
+
+    E-mail: mike@zeroteam.sk
+    WWW: https://sourceforge.net/p/zxspectrumutils/
+    IRC: #z80 at IRCnet
+
+  You can send us any suggest to update, change or feature request of these
+  utilities.
+
+ We hope this utilities will be very useful for you and for your enjoyment.
+ ==========================================================================

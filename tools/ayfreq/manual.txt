@@ -1,0 +1,7 @@
+ayfreq freq
+
+	Given a 'freq' in Hz, which is the frequency at which the AY-3-8912
+works for a given computer, calculates the period for each musical note that
+can be passed to the chip tone registers, and generates it on the console.
+
+For the CPC, pass 1000000. For the ZX Spectrum, pass 1773400.

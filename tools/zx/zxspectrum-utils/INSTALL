@@ -1,0 +1,6 @@
+1. modify Makefile to fit your configuration (default works in most cases)
+2. make
+3. make install
+
+binary cleanup: make clean
+uninstall: make uninstall

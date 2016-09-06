@@ -1,0 +1,15 @@
+bmp2scr mode bitmap output_scr output_pal
+
+	Given a .bmp file generates two binary files, 'output_scr' and
+'output_pal'.  'output_scr' will be a binary file that can be loaded
+directly to the cpc video memory (thus it will have a size of 16k).
+'output_pal' will be a binary file with 16 bytes, each byte being the
+firmware (basic) color to use for each INK.
+
+'mode' can be:
+	cpc16x2		Amstrad CPC 16 colors doubled
+
+		This mode means that the original bitmap should have a width
+of 320 pixels. Only pixels on an even x coordinate are taken, and each 2
+pixels taken will form a byte in the final screen file. The height of the
+bitmap must be at least 200 pixels. The bitmap must have palette.

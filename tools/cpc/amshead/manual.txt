@@ -1,0 +1,6 @@
+amshead binfile outfile load_address exec_address
+
+	Generates 'outfile' with an AMSDOS header plus the contents of
+binfile. 'load_address' is a 16 bit address where the file will be loaded
+if executing the BASIC LOAD or RUN command. 'exec_address' is the address
+to call if exectuted with the BASIC RUN command.
