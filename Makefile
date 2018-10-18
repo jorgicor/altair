@@ -14,7 +14,7 @@ clean_thetools:
 dist_tar = altair_src.tar
 
 mk_sources = Makefile zx.mk cpc.mk zxdef.mk cpcdef.mk forlangs.sh sources.mk \
-	     README.md LICENSE.md .gitignore
+	     README.md LICENSE.md ChangeLog .gitignore
 
 release_sources = release/zx/altair_zx.pdf \
 	       release/cpc/altair_cpc.pdf
