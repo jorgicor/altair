@@ -1,3 +1,8 @@
+# ----------------------------------------------------------------------------
+# Altair, CIDLESA's 1981 arcade game remade for the ZX Spectrum and
+# Amstrad CPC.
+# ----------------------------------------------------------------------------
+
 mmelody = tools/mmelody/mmelody
 bmp2asm = tools/cpc/bmp2asm/bmp2asm
 bmp2scr = tools/cpc/bmp2scr/bmp2scr

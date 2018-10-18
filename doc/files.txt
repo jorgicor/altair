@@ -1,3 +1,8 @@
+; ----------------------------------------------------------------------------
+; Altair, CIDLESA's 1981 arcade game remade for the ZX Spectrum and
+; Amstrad CPC.
+; ----------------------------------------------------------------------------
+
 (ZX) or (CPC) means that the file is only included for that architecture.
 
 altair.asm	Main entry point, state driver, cheats.

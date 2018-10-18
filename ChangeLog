@@ -1,0 +1,8 @@
+2018-10-18
+
+	* Changed project website to https://jorgicor.niobe.org/altair .
+
+	* Removed copyright years from most headers.
+
+	* Fixed tools/cpc/bmp/bmp_load.c to make it work on 64-bit systems
+	(changed longs for ints).

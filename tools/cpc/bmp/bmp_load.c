@@ -1,7 +1,7 @@
 /*
 The MIT License (MIT)
 
-Copyright (c) 2014 Jorge Giner Cordero
+Copyright (c) 2014, 2018 Jorge Giner Cordero
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -46,10 +46,10 @@ THE SOFTWARE.
 #define BI_JPEG       4L
 #define BI_PNG        5L
 
-typedef unsigned long	DWORD;
+typedef int		LONG;
 typedef unsigned char	BYTE;
 typedef unsigned short	WORD;
-typedef long		LONG;
+typedef unsigned int	DWORD;
 
 #pragma pack(1)
 typedef struct {
@@ -98,7 +98,7 @@ typedef struct {
         DWORD      biClrImportant;
 } BITMAPINFOHEADER;
 
-typedef long FXPT2DOT30;
+typedef int FXPT2DOT30;
 
 typedef struct {
         FXPT2DOT30 ciexyzX;

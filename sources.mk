@@ -1,3 +1,8 @@
+# ----------------------------------------------------------------------------
+# Altair, CIDLESA's 1981 arcade game remade for the ZX Spectrum and
+# Amstrad CPC.
+# ----------------------------------------------------------------------------
+
 base_sources = altair.asm \
 	altair_cpc.asm \
 	altair_snd.asm \

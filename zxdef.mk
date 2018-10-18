@@ -1,3 +1,8 @@
+# ----------------------------------------------------------------------------
+# Altair, CIDLESA's 1981 arcade game remade for the ZX Spectrum and
+# Amstrad CPC.
+# ----------------------------------------------------------------------------
+
 bin2tap = tools/zx/zxspectrum-utils/bin/bin2tap
 
 zx_cover_bin = data/zx/cover.bin

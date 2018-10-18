@@ -1,8 +1,6 @@
 Intro
 =====
 
-Copyright (c) 2016 Jorge Giner Cordero
-
 In 2013, *Ivanzx*, on his blog [El rincón del Spectrum][1], started a contest
 to port any game from a spanish arcade machine to the [ZX Spectrum][2].
 I decided to port *Altair*, a game from 1981 by the spanish company *CIDELSA*,
@@ -22,14 +20,14 @@ This source package is the full source code of the game, plus required tools
 except the Z80 assembler.
 
 To get this package and precompiled TAP and DSK for your Spectum and Amstrad,
-visit http://jorgicor.sdfeu.org/altair . 
+visit https://jorgicor.niobe.org/altair . 
 
 Compile
 =======
 
 First, you need a Z80 assembler compatible with TASM (Telemark Cross
 Assembler). You can use `uz80as` which is free software and available here:
-http://jorgicor.sdfeu.org/uz80as .
+https://jorgicor.niobe.org/uz80as .
 
 Then, you must build some required tools that are included in this package.
 Type:
@@ -53,12 +51,12 @@ As an alternative, you can use:
 - `make clean` to clean some generated files.
 - `make distclean` to clean all generated files that are not distributed.
 - `make dist` to make a distribution source package.
-- `make clean_thetools` to clean build objest in the tools folder.
+- `make clean_thetools` to clean build objects in the tools folder.
 
-Licenses
-========
+Copyright
+=========
 
-The game is released as free software. See the file LICENSE.md.
+The game is released as free software. See the file LICENSE.md .
 
 Under `tools/`, there are two packages not written by me:
 
