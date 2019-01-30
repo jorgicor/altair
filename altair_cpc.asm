@@ -212,8 +212,14 @@ chstrf
 
 drstrs
 
+; Save 'rand' seed.
+
+	ld a,(randp)
+	ld (srandsv),a
+
 ; Set the start address where to take random values to draw the stars.
 ; We use two addresses depending on Star Mode, address 0 and adress 192.
+
 
 	ld a,(starm)
 	or a
@@ -284,6 +290,11 @@ drstrs6 pop hl
 	add hl,bc
 	pop bc
 	djnz drstrs8
+
+; Restore rand seed.
+
+	ld a,(srandsv)
+	ld (randp),a
 	ret
 
 ; Star Mode Counter.
@@ -293,6 +304,9 @@ starmc	.db 0
 ; Star Mode.
 ; Takes values 0 or 1 to set two different starfield patterns.
 starm	.db 0
+
+; Saves the 'rand' seed to restore it after we paint the stars.
+srandsv	.db 0
 
 ; -------------------------
 ; 'drtxfx' Draw Text Effect
