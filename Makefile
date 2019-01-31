@@ -3,7 +3,7 @@
 # Amstrad CPC.
 # ----------------------------------------------------------------------------
 
-all: zx cpc
+all: zx zx128 cpc
 
 thetools:
 	cd tools ; $(MAKE)
@@ -135,13 +135,22 @@ tools_sources = tools/mmelody/manual.txt \
 	tools/Makefile
 
 zx_es_nc:
-	$(MAKE) GAMELANG=es GAMELANG_MAC=LANG_ES -f zx.mk zx_nc
+	$(MAKE) MODE=48 GAMELANG=es GAMELANG_MAC=LANG_ES -f zx.mk zx_nc
 
 zx_nc:
-	./forlangs.sh zx.mk zx_nc
+	MODE=48 ./forlangs.sh zx.mk zx_nc
 
 zx:
-	./forlangs.sh zx.mk zx
+	MODE=48 ./forlangs.sh zx.mk zx
+
+zx128_es_nc:
+	$(MAKE) MODE=128 GAMELANG=es GAMELANG_MAC=LANG_ES -f zx.mk zx_nc
+
+zx128_nc:
+	MODE=128 ./forlangs.sh zx.mk zx_nc
+
+zx128:
+	MODE=128 ./forlangs.sh zx.mk zx
 
 cpc_es_nc:
 	$(MAKE) GAMELANG=es GAMELANG_MAC=LANG_ES -f cpc.mk cpc_nc
@@ -154,7 +163,8 @@ cpc:
 
 clean:
 	rm -f altair.lst altait.obj
-	./forlangs.sh zx.mk zx_clean
+	MODE=48 ./forlangs.sh zx.mk zx_clean
+	MODE=128 ./forlangs.sh zx.mk zx_clean
 	./forlangs.sh cpc.mk cpc_clean
 	$(MAKE) -f zxdef.mk zxdef_clean
 	$(MAKE) -f cpcdef.mk cpcdef_clean

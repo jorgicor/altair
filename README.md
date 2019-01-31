@@ -47,7 +47,8 @@ languages. They will be generated under `release/`.
 
 As an alternative, you can use:
 
-- `make cpc_nc` or `make zx_nc` to make the DSKs or TAPs without covers.
+- `make cpc_nc` or `make zx_nc` or `make zx128_nc` to make the DSKs or TAPs
+  without covers.
 - `make clean` to clean some generated files.
 - `make distclean` to clean all generated files that are not distributed.
 - `make dist` to make a distribution source package.

@@ -18,7 +18,11 @@ AY_W_PORT_H	.equ	AY_W_PORT >> 8
 AY_PORT_L	.equ	$fd
 
 ; If the AY-3-8912 sound chip is detected.
+#ifdef ZX128
+ay_detected	.db 1
+#else
 ay_detected	.db 0
+#endif
 
 ; ---------------------------------
 ; 'detect_ay' Detect AY-3-8912 chip
@@ -26,6 +30,10 @@ ay_detected	.db 0
 ;	Will set 'ay_detected' to 1 if the AY sound chip is detected on the
 ; system, or 0 otherwise.
 
+detect_ay
+	ret
+
+#if 0
 detect_ay
 
 ; Select a 4 bit register.
@@ -40,7 +48,7 @@ detect_ay
 
 detect_ay_loop
 
-; We always shoud read the entry value & 0x0f as this is a 4 bit register.
+; We always should read the entry value & 0x0f as this is a 4 bit register.
 
 	ld a,e
 	and $0f
@@ -79,6 +87,9 @@ detect_ay_negative
 	xor a
 	ld (ay_detected),a
 	ret
+
+#endif
+
 
 ; ------------
 ; 'ay_refresh'
