@@ -1,3 +1,18 @@
+2019-01-31
+
+	* Fixed: for the CPC, after some time, the alien ships remained on the
+	right middle of the screen. This happened because we overwrote the
+	seed used for 'rand' when we drew the starfield, and because of that
+	the seed always started for the rest of the game (aliens moves, etc)
+	at the same start value.  Now, we save the random seed when we draw
+	the starfield, so we can restore it later and then it truly cycles for
+	the rest of the game. Changed as well for the ZX.
+
+	* We were autodetecting the AY chip for the ZX Spectrum, but some
+	emulators have problems with this. Now, we create two different tapes
+	for the ZX, one with AY sound (128K) and one with beeper sound (48K).
+
+
 2018-10-18
 
 	* Changed project website to https://jorgicor.niobe.org/altair .
